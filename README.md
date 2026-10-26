@@ -1,48 +1,60 @@
-# Wayfarer — Personal Release Guide
+# Wayfarer
 
-Wayfarer is a local-first, manual-first D&D 2024 character sheet and campaign notebook, separate from all other projects in E:\Projects.
+![Wayfarer banner: a gold compass rose on a dark green map](assets/wayfarer-banner.svg)
 
-## Public website and deployment
+**Character & Chronicle** · A fillable D&D 2024 character sheet and campaign notebook that saves in your browser. Keep a character's numbers, spells, belongings, and story together, with room for homebrew and your own rulings.
 
-The project is configured for GitHub Pages. See [PUBLISHING.md](PUBLISHING.md) for creating the public repository, deploying the site and transferring browser-local characters from localhost. Publishing the source does **not** upload your existing local character saves.
+**[Open the app](https://aungthurahein-nov03.github.io/Wayfarer/)** · [Run locally](#run-locally) · [Protect your saves](#saving-and-backups) · [Development roadmap](ROADMAP.md)
 
-## Getting started
+## At the table
 
-Run `npm install` once, then `npm run dev` in `E:\Projects\Wayfarer`. Open the URL printed by Vite. Use `npm test` for unit tests, `npm run build` to produce the standalone static bundle in `dist/`.
+| Space | What you can do |
+| --- | --- |
+| **Character Sheet** | Keep multiple characters with separate notebooks. Fill in ability scores, skills, saving throws, proficiencies, feats, portrait, and backstory. Modifiers and proficiency totals update from your entries. |
+| **Combat** | Record attacks and resources, adjust HP with temporary HP absorption, and mark death saves, exhaustion, and a single hit-dice pool. |
+| **Spellbook** | Add and search custom spells, filter by level, mark prepared and concentration spells, and track slots with limits you set yourself. |
+| **Inventory** | Record equipment, individual items, quantities, descriptions, and currency. |
+| **Notebook** | Capture quick notes from any tab, then search, categorize, pin, preview basic Markdown, and link related entries. |
 
-## Features
+Wayfarer leaves class progression, rest effects, and spellcasting rulings to the player. Fields stay editable so the sheet can accommodate homebrew.
 
-- Character Sheet: attributes, calculated modifiers, skills, saving throws, feats, and story.
-- Combat: HP, temporary HP damage absorption, death saves, exhaustion, hit dice, resources.
-- Spellbook: two-page parchment grimoire, spell slots, Prepared/Concentration flags, expandable grouped and searchable spells.
-- Inventory: weapons, equipment, currency and belongings.
-- Notebook: categories, search, Markdown preview, pins, one-way and reciprocal note links.
+## Run locally
 
-Wayfarer intentionally avoids automatic class progression, rest rules, and full rules-engine behavior. Homebrew and derived values stay editable.
+The deployment workflow uses Node.js 22. From the project directory:
 
-## Back up before you experiment
+```sh
+npm ci
+npm run dev
+```
 
-Click **Export** and keep the downloaded JSON outside the browser profile. Export periodically. **Import** replaces the *entire* local character library only after confirmation; export existing data first. Verify characters, spells and notes after importing.
+Open the address printed by Vite. The development server binds to `127.0.0.1`.
 
-Character data lives in browser `localStorage`, specific to the browser and precise URL/origin. Clearing site data, changing browsers or opening another host may make the library appear missing. Saved JSON backups are the recovery path. Large portrait pictures can fill local storage; use small images.
+```sh
+npm test
+npm run build
+```
 
-## Printing
+The production build goes to `dist/`. The [publishing guide](PUBLISHING.md) covers the GitHub Pages workflow.
 
-Select the desired tab and press **Print** in the header, then choose your printer or **Save as PDF**. Wayfarer generates a separate, compact print layout using the saved data (not the live editable form): the Character Sheet uses two balanced columns, descriptions are included in full, and the Notebook prints complete notes. Only the currently selected tab is printed. In Chrome/Edge, turn off **Headers and footers** in More settings to remove the date, URL, and page number. Preview before saving; long journals and spell descriptions may span pages.
+## Saving and backups
 
-## Known limitations
+> **Keep an exported backup.** Wayfarer autosaves to your browser's `localStorage`, which belongs to that browser and website address. A localhost save does not automatically appear on the published site.
 
-- A single hit-dice pool is tracked; multiclass die types can be recorded in the manual field.
-- Spell slot limits, preparation and concentration are all manual.
-- Notebook Markdown preview supports simple headings, lists, bold, italics and inline code, not arbitrary HTML.
-- No cloud sync or accounts; local browser storage is not a substitute for exports.
-- Full cross-browser accessibility, print layout and end-to-end interaction testing still require manual acceptance on target devices.
-- The app does not bundle copyrighted sourcebook text.
+Choose **Export** to download the entire character library as JSON. To move it, open Wayfarer at the new address and choose **Import**. The file is validated before you confirm, but importing **replaces the entire library** at the new address. Export that library first if you might need it. Clearing site data or losing a browser profile can erase local saves; your exported JSON is the recovery copy.
 
-## Personal release checklist
+Portrait uploads must be under 1 MB. Even smaller images use browser storage, so keep them compact.
 
-- [x] Automated tests and production build.
-- [x] Character sheet, notebook, spellbook, backup flow user-tested during development.
-- [x] Print action and print layout implemented.
-- [ ] Confirm print preview/PDF output visually in the intended browser.
-- [ ] Cross-browser end-to-end and accessibility audit.
+## Print a sheet or journal
+
+Select a tab and choose **Print** in the header. Wayfarer prepares a separate print view for the current character and selected tab; use your browser's **Save as PDF** option if you want a file. Preview long notes and spell descriptions, which may span pages.
+
+## Under the hood
+
+Wayfarer is a static JavaScript app built with Vite. The UI, data model, backup handling, journal, trackers, and print view live in `src/`; automated checks live in `tests/`. GitHub Actions runs `npm ci`, `npm test`, and `npm run build` before deploying `dist/` to GitHub Pages. Character data has no account, server, database, or cloud sync.
+
+### Current limits
+
+- Spell preparation, concentration, slots, and hit dice are manual. The optional hit-dice counter supports one die type; multiclass details can go in the free-text field.
+- Journal preview supports basic headings, lists, emphasis, and inline code, rather than full Markdown or HTML.
+- Cross-browser accessibility, end-to-end interaction, and visual print/PDF acceptance still need checking. The [roadmap](ROADMAP.md) has the detailed status.
+- No sourcebook text is bundled.
