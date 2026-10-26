@@ -1,0 +1,6 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {makeCharacter} from '../src/model.js';
+import {ensureStructured,addRow,updateRow,removeRow} from '../src/structured.js';
+test('upgrade preserves original free-form contents',()=>{const c=makeCharacter();c.attacks='Old longsword details';c.spells='Magic missile';ensureStructured(c);assert.equal(c.attacks,'Old longsword details');assert.equal(c.spells,'Magic missile');assert.deepEqual(c.structured.attacks,[]);});
+test('rows can be created edited removed without disturbing legacy notes',()=>{const c=makeCharacter();c.inventory='Existing backpack';const r=addRow(c,'inventory','item-1');assert.equal(r.id,'item-1');assert.equal(updateRow(c,'inventory','item-1','name','Healing Potion'),true);assert.equal(c.structured.inventory[0].name,'Healing Potion');assert.equal(updateRow(c,'inventory','item-1','arbitrary','bad'),false);assert.equal(removeRow(c,'inventory','item-1'),true);assert.equal(c.inventory,'Existing backpack');});
+test('old character collections initialize safely',()=>{const c={attacks:'old',features:'old',spells:'old',inventory:'old'};ensureStructured(c);assert.equal(c.structured.features.length,0);ensureStructured(c);assert.equal(c.attacks,'old');});

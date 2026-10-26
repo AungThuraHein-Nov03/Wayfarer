@@ -1,0 +1,63 @@
+/* Wayfarer open-book desktop skin. All controls remain ordinary HTML fields. */
+:root{--paper:#e6d4af;--ink:#392c21;--paper-edge:#bea47a;--leather:#38251b}
+body{background:radial-gradient(ellipse at 30% 8%,#4a3327 0,#211915 58%,#15110e 100%);color:var(--ink)}
+.topbar{background:#241c18;border-bottom:2px solid #7b6140;box-shadow:0 4px 12px #0b0807aa}
+.brand b{color:#f1d7a0}.brand small{color:#baa27c}.mark{color:#edcc80}
+.topbar .toolbar button,.topbar .toolbar select,.topbar .import-button{background:#3b2b23;color:#f2ddb0;border-color:#83694a}
+.layout{display:block;max-width:1740px;margin:auto;padding:12px 18px 30px;min-height:calc(100vh - var(--wayfarer-header-height))}
+.sidebar{position:relative;top:auto;height:auto;overflow:visible;background:transparent;border:0;padding:0;margin-bottom:0;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px}
+.sidebar>.eyebrow,.sidebar>.side-name,.sidebar>.side-meta{display:none}
+.sidebar nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0;position:relative;z-index:2}
+.sidebar nav button{background:linear-gradient(#543c2c,#34241d);border:1px solid #927047;color:#e9d2a2;border-radius:9px 9px 0 0;padding:10px 19px;width:auto;font-family:Georgia,serif}
+.sidebar nav button.active{background:linear-gradient(#dbc293,#c3a575);color:#352618;border:1px solid #e4cb9e;border-bottom-color:#c3a575}
+.sidebar nav button span{color:inherit;width:20px}
+.side-bottom{position:absolute;right:8px;top:2px;margin:0;padding:0;display:flex;gap:5px}
+.side-bottom button{width:auto;padding:6px 8px;font-size:11px;border:1px solid #72573c;background:#38291f;color:#e1c99e}
+.side-bottom p{display:none}
+.content{position:relative;max-width:none;min-height:calc(100vh - 130px);margin:0;background:linear-gradient(90deg,#c3a77c 0%,#edddb9 2%,#e5d1aa 47%,#d0b689 49.7%,#836648 50%,#c0a274 50.3%,#ead7b2 53%,#ecdcb9 98%,#bea078 100%);border:11px solid var(--leather);outline:2px solid #b18a4c;border-radius:13px 13px 22px 22px;box-shadow:0 7px 0 #130c09,0 19px 34px #0009,inset 0 0 0 2px #9d7d4e;padding:15px 35px 40px;color:var(--ink)}
+.content:before{content:"";position:absolute;top:0;bottom:0;left:50%;width:19px;transform:translateX(-50%);background:linear-gradient(90deg,#59432b15,#58432d61 37%,#513c2780 52%,#fff5df55 100%);pointer-events:none;z-index:1}
+.page-head{padding:0 0 8px;margin-bottom:8px;border-bottom:1px solid #94795880}
+.page-head h1{font-size:22px;color:#3c2a1c}
+.page-head .eyebrow,.page-head p,.saved{color:#796044}
+.panel,.identity,.note-card,.structured-row,.feature-card{background:#fff7df44;border-color:#a48a65;border-radius:7px;box-shadow:none;color:var(--ink)}
+.panel{padding:11px 13px;margin-bottom:10px}
+h1,h2,.side-name,.note-title{color:#49301e}
+.panel h2{color:#56381f;font-family:Georgia,serif;font-size:15px}
+.section-head>span,.muted,.side-meta,.note-card small{color:#715c44}
+label,.tracker h3,.feature-card-name,.feature-card-meta,.ability strong,.modifier,.skill-total,.saving-list span{color:#4d3825}
+input:not([type=checkbox]):not([type=file]),textarea,select{background:#fbf2dba8;border:1px solid #b29b78;color:#392b1c}
+input::placeholder,textarea::placeholder{color:#8b785e}
+button{background:#e4d0a6;border-color:#9b7e53;color:#37291c}
+button:hover{background:#d5b989}
+.primary{background:#3d5745;color:#f5ead1;border-color:#253a2d}
+.primary:hover{background:#506e57}
+.ability{background:#385040;border-color:#9b834e;color:#f4e4c0}
+.ability strong,.ability .modifier{color:#f6e2b2}
+.ability label{color:#e5d2aa}
+.ability input{background:#26392e!important;color:#fff3d7!important;border-color:#b39b6d!important}
+.skill{border-color:#b5a180}.skill-name small{color:#766144}
+.saving-list label{background:#dfc69c99;color:#483622}
+.identity{background:#eee0bda9}
+.avatar{background:#50604b;color:#efcf82;border-color:#917044}
+.feature-card{background:#f5e6c4a8}
+.feature-card>summary{color:#3a2a1d}
+.feature-card-name{color:#3f2d1f}.feature-card-meta{color:#705a41}
+.feature-card[open]>summary,.feature-card{border-color:#b49c76}
+.feature-card-chevron{color:#6a4c30}
+.structured-row{background:#f4e5c68f}
+.legacy-details{border-color:#b9a480}.legacy-details summary{color:#5b4129}
+.checkrow,.death,.tracker{border-color:#b7a281}
+.stat-grid{gap:7px}.note-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.note-card{background:#f8e9c8aa}.note-title{color:#46311d}
+.note-card button{color:#5a422b}
+.note-filters label{color:#4b3829}
+.note-links{border-color:#ab9576}
+.note-preview{background:#f5e8c9;color:#422f21;border-color:#baa17d}
+.floating{background:#4d674f;color:#fff0cc}
+.drawer,.modal{background:#ead8b5;color:#3b2b1e;border-color:#856a49}
+.modal h2,.drawer h2{color:#54371d}
+.warning{color:#fff5e4}
+.columns{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:35px}
+.columns>div{min-width:0}
+@media(max-width:1050px){.layout{padding:8px}.content{padding:15px 19px 28px}.columns{gap:24px}.sidebar nav button{padding:8px 12px}.side-bottom{position:static}}
+@media(max-width:760px){.layout{padding:4px}.sidebar{display:block}.sidebar nav{flex-wrap:nowrap;overflow:auto;justify-content:flex-start}.sidebar nav button{flex:none}.side-bottom{display:none}.content{border-width:6px;padding:12px;background:linear-gradient(90deg,#ccb389,#edddb9 3%,#e7d4af 97%,#bea078);min-height:85vh}.content:before{display:none}.columns{grid-template-columns:1fr;gap:0}.page-head h1{font-size:21px}.ability-grid{grid-template-columns:repeat(3,1fr)}}

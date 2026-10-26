@@ -1,0 +1,21 @@
+# Dependencies and generated builds
+node_modules/
+dist/
+coverage/
+.vite/
+
+# Local-only environment and editor data
+.env
+.env.*
+!.env.example
+*.local
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Exported character libraries are personal and should never be committed
+wayfarer-backup-*.json
+backups/
+exports/

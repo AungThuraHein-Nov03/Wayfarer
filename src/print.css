@@ -1,0 +1,53 @@
+/* Dedicated print document. Print the character DATA, not interactive form widgets. */
+.print-document{display:none!important}
+@media print{
+ @page{size:A4;margin:10mm 12mm}
+ html,body,#app{margin:0!important;padding:0!important;background:#fff!important;color:#242424!important}
+ #app>.topbar,#app>.layout,#app>.floating,#app>.drawer,#app>.modal-backdrop,#app>.warning{display:none!important}
+ .print-document{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;background:white!important;color:#242424!important;font-family:Georgia,'Times New Roman',serif!important;font-size:8.5pt!important;line-height:1.23!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .print-document *{box-sizing:border-box}
+ .print-header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:2px solid #665540;padding:0 0 7px;margin-bottom:8px}
+ .print-header span{font-size:7pt;letter-spacing:1.8px;color:#77644b}
+ .print-header h1{font-size:16pt;line-height:1.2;color:#352a1f;margin:2px 0 0}
+ .print-header>strong{font-weight:normal;color:#5b4c3d;font-size:9pt;text-align:right}
+ .print-identity{display:flex;align-items:center;gap:9px;padding:6px 9px;border:1px solid #c8bca8;border-radius:5px;margin-bottom:8px;min-height:53px;break-inside:avoid}
+ .print-portrait{height:52px;width:45px;object-fit:cover;border-radius:3px;border:1px solid #8d7d64}
+ .print-identity-body{flex:1;min-width:0}
+ .print-character-name{font-size:14pt;font-weight:bold;color:#3b291f;line-height:1.1;margin-bottom:5px}
+ .print-identity-fields{display:grid;grid-template-columns:2fr .55fr 1fr 1fr;gap:7px}
+ .print-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:start}
+ .print-columns>div{min-width:0}
+ .print-group{border:1px solid #c5b6a0;border-radius:5px;padding:6px 8px;margin:0 0 7px;background:#fff}
+ .print-group>h2{font-family:Georgia,'Times New Roman',serif;color:#4a3524;font-size:10pt;margin:0 0 5px;padding-bottom:3px;border-bottom:1px solid #d4c6b2;break-after:avoid}
+ .print-field{display:flex;flex-direction:column;gap:1px;border-bottom:1px dotted #d1c8b8;padding:2px 0;min-width:0;break-inside:avoid}
+ .print-field small{color:#6f6255;font-family:Arial,sans-serif;font-size:6.5pt;line-height:1.1}
+ .print-field span{white-space:pre-wrap;overflow-wrap:anywhere}
+ .print-abilities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+ .print-abilities>div{display:flex;flex-direction:column;align-items:center;gap:1px;border:1px solid #c6b9a3;border-radius:3px;padding:3px 2px}
+ .print-abilities strong{font-size:7pt;color:#65503a}
+ .print-abilities b{font-size:14pt;color:#2e422f;line-height:1}
+ .print-abilities small{font-size:8pt}
+ .print-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}
+ .print-skills>div{display:flex;align-items:baseline;gap:3px;border-bottom:1px solid #e3dacb;padding:2px 0;min-width:0}
+ .print-skills span{flex:1;min-width:0;overflow-wrap:anywhere}
+ .print-skills strong{font-size:8pt;color:#334e36}
+ .print-skills small{font-size:6pt;color:#7e6a51}
+ .print-saves,.print-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 8px}
+ .print-saves .print-field,.print-stat-grid .print-field{min-width:0}
+ .print-muted{color:#756b5b;font-family:Arial,sans-serif;font-size:7pt;margin:2px 0 4px}
+ .print-prose{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.3}
+ .print-empty{font-style:italic;font-size:7pt;color:#887b69;margin:5px 0}
+ .print-entry{border-bottom:1px solid #d7c9b7;padding:4px 0;break-inside:avoid}
+ .print-entry strong{font-weight:bold;color:#443121}
+ .print-entry>small{color:#756657;margin-left:5px}
+ .print-entry-details{display:flex;flex-wrap:wrap;gap:2px 5px;margin:2px 0}
+ .print-tag{font-size:7pt;color:#5a554c;overflow-wrap:anywhere}
+ .print-entry .print-prose{margin:3px 0}
+ .print-slots{display:grid;grid-template-columns:1fr auto;gap:3px 12px}
+ .print-slots>b{color:#37503a;text-align:right}
+ .print-notes{display:block}
+ .print-note{border:1px solid #ccc0aa;border-radius:4px;padding:8px 10px;margin:0 0 9px;break-inside:auto}
+ .print-note h2{font-size:12pt;color:#443121;margin:0}
+ .print-note .print-prose{margin-top:6px}
+ .print-notes .print-note:has(.print-prose){overflow-wrap:anywhere}
+}

@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {mod,skillModifier,makeCharacter,loadLibrary,saveLibrary,SKILLS} from '../src/model.js';
+test('ability modifiers round down for negative odd values',()=>{assert.equal(mod(9),-1);assert.equal(mod(10),0);assert.equal(mod(17),3);});
+test('skill proficiency and expertise are computed',()=>{const c=makeCharacter();c.abilities.DEX=18;c.proficiencyBonus=3;assert.equal(skillModifier(c,'Stealth','DEX'),4);c.skillProficiencies.Stealth=true;assert.equal(skillModifier(c,'Stealth','DEX'),7);c.expertise.Stealth=true;assert.equal(skillModifier(c,'Stealth','DEX'),10);});
+test('eighteen unique skill definitions',()=>assert.equal(new Set(SKILLS.map(([k])=>k)).size,18));
+test('saves and loads separate character library',()=>{const m=new Map(),s={getItem:k=>m.get(k),setItem:(k,v)=>m.set(k,v)};const data=loadLibrary(s);data.characters[0].name='Cassian';saveLibrary(data,s);assert.equal(loadLibrary(s).characters[0].name,'Cassian');});

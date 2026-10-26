@@ -1,0 +1,6 @@
+const bounded=(value,min,max)=>{const n=Number(value);return Number.isFinite(n)?Math.max(min,Math.min(max,Math.trunc(n))):min;};
+export function ensureCombatDetails(c){if(!c.deathSaves||typeof c.deathSaves!=='object')c.deathSaves={success:0,failure:0};for(const key of ['success','failure'])c.deathSaves[key]=bounded(c.deathSaves[key],0,3);if(c.exhaustion===undefined)c.exhaustion=0;if(!c.hitDiceTracker||typeof c.hitDiceTracker!=='object')c.hitDiceTracker={die:'d10',total:0,remaining:0};return c;}
+export function setDeathSaves(c,type,value){ensureCombatDetails(c);if(!['success','failure'].includes(type))return false;c.deathSaves[type]=bounded(value,0,3);return true;}
+export function resetDeathSaves(c){ensureCombatDetails(c);c.deathSaves.success=0;c.deathSaves.failure=0;}
+export function setExhaustion(c,value){ensureCombatDetails(c);c.exhaustion=bounded(value,0,6);return true;}
+export function setHitDice(c,field,value){ensureCombatDetails(c);const pool=c.hitDiceTracker;if(field==='die'){if(!/^d(4|6|8|10|12)$/.test(value))return false;pool.die=value;return true;}if(field==='total'){pool.total=bounded(value,0,99);pool.remaining=Math.min(pool.total,bounded(pool.remaining,0,99));return true;}if(field==='remaining'){pool.remaining=Math.min(bounded(value,0,99),bounded(pool.total,0,99));return true;}return false;}
