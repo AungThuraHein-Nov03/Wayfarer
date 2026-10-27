@@ -6,6 +6,10 @@
 
 **[Open the app](https://aungthurahein-nov03.github.io/Wayfarer/)** · [Run locally](#run-locally) · [Protect your saves](#saving-and-backups) · [Development roadmap](ROADMAP.md)
 
+## What's new in v1.1
+
+Wayfarer now includes automatically calculated Passive Perception (with manual adjustment), Character Size, spellcasting ability with editable Spell Save DC and Spell Attack Bonus, Ritual / Material spell markers, and separate CP, SP, EP, GP, PP coin fields. Old character saves and original currency notes remain compatible.
+
 ## At the table
 
 | Space | What you can do |

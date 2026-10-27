@@ -14,7 +14,7 @@
  .print-portrait{height:52px;width:45px;object-fit:cover;border-radius:3px;border:1px solid #8d7d64}
  .print-identity-body{flex:1;min-width:0}
  .print-character-name{font-size:14pt;font-weight:bold;color:#3b291f;line-height:1.1;margin-bottom:5px}
- .print-identity-fields{display:grid;grid-template-columns:2fr .55fr 1fr 1fr;gap:7px}
+ .print-identity-fields{display:grid;grid-template-columns:2fr .55fr 1fr 1fr .6fr;gap:7px}
  .print-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;align-items:start}
  .print-columns>div{min-width:0}
  .print-group{border:1px solid #c5b6a0;border-radius:5px;padding:6px 8px;margin:0 0 7px;background:#fff}

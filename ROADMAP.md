@@ -98,6 +98,16 @@ Only implement capabilities backed by real playtesting needs.
 
 **Exit criteria:** Wayfarer is dependable enough to hold an ongoing campaign character and notebook with recoverable backups.
 
+## V1.1 — Sheet Completeness (implemented; browser acceptance pending)
+- [x] Passive Perception with proficiency, expertise and manual adjustment
+- [x] Editable Size
+- [x] Spellcasting ability, Save DC and Attack Bonus with manual overrides
+- [x] Ritual and material-component markers per spell
+- [x] Five coin fields, preserving legacy free-form currency notes
+- [x] Backward-compatible JSON exports and print layout updates
+- [x] 46 automated tests and production build verified
+- [ ] Visual browser acceptance on character sheet, Spellbook and Inventory
+
 ## Current Known Risks / Checks
 
 - **Build verified:** Production build and 37 automated tests passed on 2026-10-26 after the print layout fix.
