@@ -1,7 +1,7 @@
 /* Read-only quick grimoire, kept separate from the editable Spellbook tab. */
 body.prepared-book-open{overflow:hidden}
-.prepared-book-launch{display:inline-flex;align-items:center;gap:8px;background:#715534;border:1px solid #bda77c;color:#ffedca;font-weight:700;white-space:nowrap;box-shadow:0 4px 14px #0003}
-.prepared-book-launch:hover{background:#8b6942}
+.prepared-book-launch{display:inline-flex;align-items:center;background:transparent;border:0;border-radius:0;padding:0;box-shadow:none;color:#b8c9bb;font-size:12px;font-weight:500;line-height:1.5;white-space:nowrap;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
+.prepared-book-launch:hover,.prepared-book-launch:focus-visible{background:transparent;color:#e6d4ab;text-decoration-color:currentColor}
 .page-head-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end}
 .prepared-book-overlay{position:fixed;inset:0;z-index:50;background:#050806d9;display:flex;align-items:center;justify-content:center;padding:18px}
 .prepared-book-dialog{width:min(1220px,100%);height:min(790px,calc(100dvh - 36px));max-height:calc(100dvh - 36px);display:flex;flex-direction:column;border-radius:16px;background:#221b15;border:1px solid #9c7d53;box-shadow:0 30px 100px #000c;overflow:hidden}

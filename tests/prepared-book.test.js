@@ -51,6 +51,7 @@ test('the grimoire escapes user-authored spell names and descriptions',()=>{
 test('quick Spell Book controls are available on both sheet and combat and switch pages only',()=>{
  const source=readFileSync(new URL('../src/main.js',import.meta.url),'utf8');
  assert.match(source,/tab==='sheet'\|\|tab==='combat'\?'<button type="button" class="prepared-book-launch"/);
+ assert.match(source,/>Spell Book<\/button>/,'quick access uses text without the large book icon');
  assert.match(source,/pages\.innerHTML=renderPreparedPages\(character\(\),quickBookLevel\)/);
  assert.match(source,/case 'open-prepared-book':openPreparedBook\(el\)/);
  assert.match(source,/case 'close-prepared-book':closePreparedBook\(\)/);

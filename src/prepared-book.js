@@ -43,14 +43,14 @@ export function renderPreparedPages(character,level='0'){
     <div class="prepared-page-ornament" aria-hidden="true">✦ ✧ ✦</div>
     <h2>${esc(levelLabel)}</h2>
     <p class="prepared-page-subtitle">${spells.length} prepared ${spells.length===1?'spell':'spells'}</p>
-    <div class="prepared-page-scroll">${spells.length?left.map(spellCard).join(''):'<p class="prepared-book-empty">No prepared spells at this level. Mark spells as Prepared in the main Spellbook to see them here.</p>'}</div>
+    <div class="prepared-page-scroll" tabindex="0" aria-label="Spell entries on this page">${spells.length?left.map(spellCard).join(''):'<p class="prepared-book-empty">No prepared spells at this level. Mark spells as Prepared in the main Spellbook to see them here.</p>'}</div>
     <span class="prepared-page-footer">WAYFARER · GRIMOIRE</span>
   </section>
   <section class="prepared-book-page" aria-label="Right page">
     <div class="prepared-page-ornament" aria-hidden="true">✦ ✧ ✦</div>
     <h2>${spells.length?'Arcane Records':'Awaiting Discovery'}</h2>
     <p class="prepared-page-subtitle">${spells.length?'Prepared for the adventure ahead':'Your next spell awaits'}</p>
-    <div class="prepared-page-scroll">${right.length?right.map(spellCard).join(''):`<p class="prepared-book-empty">${spells.length?'Turn to another bookmark to view spells of a different level.':'The grimoire will fill as you prepare your spells.'}</p>`}</div>
+    <div class="prepared-page-scroll" tabindex="0" aria-label="Spell entries on this page">${right.length?right.map(spellCard).join(''):`<p class="prepared-book-empty">${spells.length?'Turn to another bookmark to view spells of a different level.':'The grimoire will fill as you prepare your spells.'}</p>`}</div>
     <span class="prepared-page-footer">CHARACTER & CHRONICLE</span>
   </section>`;
 }
