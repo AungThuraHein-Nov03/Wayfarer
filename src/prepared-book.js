@@ -1,4 +1,4 @@
-import {matchingSpells} from './spellbook.js';
+import {matchingSpells,spellLevel} from './spellbook.js';
 
 export const BOOKMARK_LEVELS=[
   ['0','Cantrips'],
@@ -16,6 +16,7 @@ export function preparedSpellsForLevel(character,level='0'){
 
 const spellCard=spell=>{
   const tags=[
+    ['Level',spellLevel(spell.level)===0?'Cantrip':spellLevel(spell.level)===null?(spell.level||'Custom'):String(spellLevel(spell.level))],
     spell.casting&&['Casting',spell.casting],
     spell.range&&['Range',spell.range],
     spell.duration&&['Duration',spell.duration]
@@ -33,9 +34,15 @@ const spellCard=spell=>{
   </article>`;
 };
 
-export function renderPreparedPages(character,level='0'){
-  const spells=preparedSpellsForLevel(character,level);
-  const levelLabel=BOOKMARK_LEVELS.find(([key])=>key===String(level))?.[1]||'Cantrips';
+export function searchPreparedSpells(character,query=''){
+  const search=String(query??'').trim().toLocaleLowerCase();
+  return search?matchingSpells(character,'','all').filter(spell=>spell.prepared===true&&String(spell.name??'').toLocaleLowerCase().includes(search)):[];
+}
+
+export function renderPreparedPages(character,level='0',query=''){
+  const searching=Boolean(String(query??'').trim());
+  const spells=searching?searchPreparedSpells(character,query):preparedSpellsForLevel(character,level);
+  const levelLabel=searching?'Search Results':BOOKMARK_LEVELS.find(([key])=>key===String(level))?.[1]||'Cantrips';
   const midpoint=Math.ceil(spells.length/2);
   const left=spells.slice(0,midpoint);
   const right=spells.slice(midpoint);
@@ -43,7 +50,7 @@ export function renderPreparedPages(character,level='0'){
     <div class="prepared-page-ornament" aria-hidden="true">✦ ✧ ✦</div>
     <h2>${esc(levelLabel)}</h2>
     <p class="prepared-page-subtitle">${spells.length} prepared ${spells.length===1?'spell':'spells'}</p>
-    <div class="prepared-page-scroll" tabindex="0" aria-label="Spell entries on this page">${spells.length?left.map(spellCard).join(''):'<p class="prepared-book-empty">No prepared spells at this level. Mark spells as Prepared in the main Spellbook to see them here.</p>'}</div>
+    <div class="prepared-page-scroll" tabindex="0" aria-label="Spell entries on this page">${spells.length?left.map(spellCard).join(''):`<p class="prepared-book-empty">${searching?'No prepared spells match your search.':'No prepared spells at this level. Mark spells as Prepared in the main Spellbook to see them here.'}</p>`}</div>
     <span class="prepared-page-footer">WAYFARER · GRIMOIRE</span>
   </section>
   <section class="prepared-book-page" aria-label="Right page">
@@ -60,7 +67,8 @@ export function renderPreparedBook(character,level='0'){
   return `<div class="prepared-book-overlay" data-book-overlay>
     <div class="prepared-book-dialog" role="dialog" aria-modal="true" aria-labelledby="prepared-book-title" tabindex="-1">
       <div class="prepared-book-header">
-        <div><span class="prepared-book-eyebrow">THE ADVENTURER'S POCKET GRIMOIRE</span><h2 id="prepared-book-title">${esc(character.name||'Adventurer')}'s Spell Book</h2></div>
+        <div class="prepared-book-heading"><span class="prepared-book-eyebrow">THE ADVENTURER'S POCKET GRIMOIRE</span><h2 id="prepared-book-title">${esc(character.name||'Adventurer')}'s Spell Book</h2></div>
+        <input type="search" class="prepared-book-search" data-book-search aria-label="Search prepared spells" placeholder="Search prepared spells…" autocomplete="off"/>
         <button type="button" class="prepared-book-close" data-action="close-prepared-book" aria-label="Close Spell Book">✕ Close</button>
       </div>
       <div class="prepared-book-stage">

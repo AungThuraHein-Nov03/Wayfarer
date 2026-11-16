@@ -19,3 +19,7 @@ Thumbs.db
 wayfarer-backup-*.json
 backups/
 exports/
+
+# Details
+PUBLISHING.md
+ROADMAP.md

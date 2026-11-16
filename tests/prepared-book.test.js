@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {makeCharacter} from '../src/model.js';
 import {addRow} from '../src/structured.js';
-import {BOOKMARK_LEVELS,preparedSpellsForLevel,renderPreparedPages,renderPreparedBook} from '../src/prepared-book.js';
+import {BOOKMARK_LEVELS,preparedSpellsForLevel,searchPreparedSpells,renderPreparedPages,renderPreparedBook} from '../src/prepared-book.js';
 
 const characterWithSpells=()=>{
  const c=makeCharacter('Lyra');
@@ -55,4 +55,38 @@ test('quick Spell Book controls are available on both sheet and combat and switc
  assert.match(source,/pages\.innerHTML=renderPreparedPages\(character\(\),quickBookLevel\)/);
  assert.match(source,/case 'open-prepared-book':openPreparedBook\(el\)/);
  assert.match(source,/case 'close-prepared-book':closePreparedBook\(\)/);
+});
+
+test('search looks across all prepared spell levels, ignoring case, and never shows unprepared spells',()=>{
+ const c=characterWithSpells();
+ assert.deepEqual(searchPreparedSpells(c,'fireBALL').map(spell=>spell.name),['Fireball']);
+ assert.deepEqual(searchPreparedSpells(c,'shield').map(spell=>spell.name),['Shield']);
+ assert.deepEqual(searchPreparedSpells(c,'30 FT'),[],'description text should not match');
+ c.structured.spells.find(spell=>spell.name==='Shield').notes='Discordant harmonics and Scorched earth';
+ assert.deepEqual(searchPreparedSpells(c,'scor'),[],'a match in another spell description must not appear');
+ const scorching=addRow(c,'spells','scorching');scorching.name='Scorching Ray';scorching.level='2';scorching.prepared=true;
+ assert.deepEqual(searchPreparedSpells(c,'SCOR').map(spell=>spell.name),['Scorching Ray']);
+ assert.deepEqual(searchPreparedSpells(c,'guide'),[]);
+ assert.deepEqual(searchPreparedSpells(c,'nothing nearby'),[]);
+ assert.deepEqual(searchPreparedSpells(c,'   '),[]);
+ const searched=renderPreparedPages(c,'0','shield');
+ assert.match(searched,/Search Results/);
+ assert.match(searched,/Shield/);
+ assert.doesNotMatch(searched,/Mage Hand|Guidance/);
+ const empty=renderPreparedPages(c,'0','gibberish');
+ assert.match(empty,/No prepared spells match your search/);
+ const reset=renderPreparedPages(c,'0','');
+ assert.match(reset,/Mage Hand/);
+ assert.doesNotMatch(reset,/Shield/);
+});
+test('popup provides a dedicated search input without replacing its spell level bookmarks',()=>{
+ const c=characterWithSpells();
+ const popup=renderPreparedBook(c);
+ assert.match(popup,/data-book-search/);
+ assert.match(popup,/aria-label="Search prepared spells"/);
+ assert.match(popup,/data-book-level="1"/);
+ const source=readFileSync(new URL('../src/main.js',import.meta.url),'utf8');
+ assert.match(source,/if\(el\.matches\('\[data-book-search\]'\)\)/);
+ assert.match(source,/pages\.innerHTML=renderPreparedPages\(character\(\),quickBookLevel,quickBookQuery\)/);
+ assert.match(source,/quickBookQuery='';const searchInput=app\.querySelector\('\[data-book-search\]'\)/);
 });

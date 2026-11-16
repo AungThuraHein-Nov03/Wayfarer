@@ -1,1 +1,93 @@
 .feature-group{border:1px solid #465548;border-radius:9px;margin:12px 0;padding:10px 12px;background:#202d25}.feature-group>summary{cursor:pointer;font-weight:700;color:#dbc69a;font-size:13px;padding:6px 0;list-style-position:inside}.feature-group>summary small{font-weight:500;color:#9dab9b;margin-left:8px}.feature-group>.feature-list{margin:12px 0}.feature-group .feature-card{margin-bottom:8px}.feature-group>button{margin:4px 0 10px;font-size:12px}
+/* Feature and resource entries: one inset, consistently aligned disclosure arrow. */
+.feature-group .feature-card>summary{list-style:none;padding-right:21px}
+.feature-group .feature-card>summary::marker{content:'';font-size:0}
+.feature-group .feature-card>summary::-webkit-details-marker{display:none}
+/* Keep Uses/Recharge text by the feature name, not beside the chevron. */
+.feature-group .feature-card-name{flex:0 1 auto}
+.feature-group .feature-card-meta{margin-right:auto;text-align:left}
+.feature-group .feature-card-chevron{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:0 0 14px;width:14px;height:14px;margin-left:4px;
+  font-size:0;line-height:1;transform:none;
+}
+.feature-group .feature-card-chevron::before{
+  content:'';display:block;width:7px;height:7px;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .15s ease;
+}
+.feature-group .feature-card[open] .feature-card-chevron{transform:none}
+.feature-group .feature-card[open] .feature-card-chevron::before{transform:translateY(2px) rotate(225deg)}
+@media(prefers-reduced-motion:reduce){.feature-group .feature-card-chevron::before{transition:none}}
+
+/* Compact the complete Features & Resources area until it is needed. */
+.feature-section{padding:0}
+.feature-section > .feature-section-summary{
+  display:flex;align-items:center;gap:10px;min-height:52px;
+  padding:13px 18px;cursor:pointer;list-style:none;
+}
+.feature-section > .feature-section-summary::marker{content:'';font-size:0}
+.feature-section > .feature-section-summary::-webkit-details-marker{display:none}
+.feature-section-summary h2{margin:0}
+.feature-section-summary small{font-size:11px;color:#9dab9b;font-weight:400}
+.feature-section-chevron{
+  width:10px;height:10px;flex:0 0 10px;margin-left:auto;
+  border-right:2px solid #e0c792;border-bottom:2px solid #e0c792;
+  transform:rotate(45deg) translate(-2px,-2px);
+  transition:transform .15s ease;
+}
+.feature-section[open] > .feature-section-summary .feature-section-chevron{
+  transform:rotate(225deg) translate(-2px,-2px);
+}
+.feature-section[open] > .feature-section-summary{
+  border-bottom:1px solid #38483f;
+}
+.feature-section > .feature-section-body{padding:12px 18px 18px}
+.feature-section > .feature-section-body > p.muted{margin:2px 0 12px}
+.feature-section > .feature-section-summary:focus-visible{outline:2px solid #b5a377;outline-offset:-3px}
+@media(prefers-reduced-motion:reduce){.feature-section-chevron{transition:none}}
+
+/* Match Feats entry arrows and right padding with Features & Resources. */
+.feature-card>summary{list-style:none;padding-right:21px}
+.feature-card>summary::marker{content:'';font-size:0}
+.feature-card>summary::-webkit-details-marker{display:none}
+.feature-card-name{flex:0 1 auto}
+.feature-card-meta{margin-right:auto;text-align:left}
+.feature-card-chevron{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:0 0 14px;width:14px;height:14px;margin-left:4px;
+  font-size:0;line-height:1;transform:none;
+}
+.feature-card-chevron::before{
+  content:'';display:block;width:7px;height:7px;
+  border-right:2px solid currentColor;border-bottom:2px solid currentColor;
+  transform:translateY(-2px) rotate(45deg);transition:transform .15s ease;
+}
+.feature-card[open] .feature-card-chevron{transform:none}
+.feature-card[open] .feature-card-chevron::before{transform:translateY(2px) rotate(225deg)}
+@media(prefers-reduced-motion:reduce){.feature-card-chevron::before{transition:none}}
+
+/* Feature and feat cards default to a safe, readable view; edit only on request. */
+.feature-readonly,.feature-edit-panel{padding:13px 15px 16px}
+.feature-readonly[hidden],.feature-edit-panel[hidden]{display:none!important}
+.feature-display-toolbar{display:flex;align-items:center;justify-content:flex-end;margin-bottom:3px}
+.feature-edit-button{
+  display:grid;place-items:center;
+  width:32px;height:32px;padding:0;border:1px solid #67775f;border-radius:7px;
+  background:#344139;color:#e4d2a8;line-height:1;
+}
+.feature-pencil-icon{display:block;width:16px;height:16px;flex:none}
+.feature-edit-button:hover{background:#475944;color:#fff0c4}
+.feature-readonly-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:0 0 13px}
+.feature-readonly-facts>div{padding:9px 11px;border:1px solid #435246;border-radius:6px;background:#1b2720;min-width:0}
+.feature-readonly-facts dt{font-size:10px;color:#9eb3a2;letter-spacing:.04em;text-transform:uppercase}
+.feature-readonly-facts dd{margin:4px 0 0;color:#f2dfb5;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.feature-readonly-heading{font-size:11px;font-weight:700;color:#d8c59d;margin-bottom:6px}
+.feature-readonly-description p{
+  color:#e5e9dd;font-size:13px;line-height:1.65;margin:0;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+}
+.feature-description-empty{color:#98a99b;font-size:12px}
+.feature-edit-panel>.structured-fields{padding:4px 0 2px}
+.feature-editor-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:9px;border-top:1px solid #3f5043}
+@media(max-width:500px){.feature-readonly,.feature-edit-panel{padding:10px 12px}.feature-readonly-facts{grid-template-columns:1fr}}
